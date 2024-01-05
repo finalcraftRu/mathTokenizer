@@ -1,72 +1,50 @@
-# Text Encoding and Decoding
+# MathTokenizer
 
-This Python module provides a simple text encoding and decoding mechanism using a specified alphabet. The encoding process converts a given text into a list of codes, and the decoding process reverses this operation.
+## Overview
+
+MathTokenizer is a simple Python module that provides functions for encoding and decoding text using a specified alphabet. The module includes functions for converting a list of words to a string, splitting a text into parts, rounding the length of symbols, encoding text into a list of numeric codes, and decoding numeric codes back into the original text.
 
 ## Usage
 
-1. **Define your Alphabet:**
-    - The `alphabet` variable in the code represents the set of characters to be used. You can customize it as per your requirements.
+### Installation
 
-2. **Encode Text:**
-    - Use the `encode` function to convert a text into a list of codes.
-    - Parameters:
-        - `alphabet`: The set of characters used for encoding.
-        - `text`: The input text to be encoded.
-        - `padding` (optional): The length to which the encoded list should be padded.
-        - `length_part` (optional): The length of each part into which the text is divided before encoding.
+To use MathTokenizer, simply include the provided `mathTokenizer.py` file in your project or import the functions directly into your script.
 
-3. **Decode Codes:**
-    - Use the `decode` function to convert a list of codes back into the original text.
-    - Parameters:
-        - `alphabet`: The set of characters used for encoding.
-        - `codes`: The list of codes to be decoded.
-        - `length_part` (optional): The length of each part into which the text was divided during encoding.
+```python
+from mathTokenizer import fromListToStr, splitText, roundSymbols, encode, decode
+```
 
-4. **Utility Functions:**
-    - `fromListToStr`: Convert a list of words into a single string.
-    - `splitText`: Split a text into parts of a specified length.
-    - `roundSymbols`: Add padding to a text to make its length a multiple of a specified value.
+### Functions
+
+#### `fromListToStr(words: list) -> str`
+
+Converts a list of words into a single string.
+
+#### `splitText(text: str, length_part: int = 3) -> list`
+
+Splits a text into parts of a specified length. The text is padded with spaces if needed.
+
+#### `roundSymbols(text: str, padding: int = 3, letter: str = " ") -> str`
+
+Rounds the length of symbols in the text by padding with a specified letter.
+
+#### `encode(alphabet: str, text: str, padding: int = 10, length_part: int = 3) -> list[int]`
+
+Encodes a text using a specified alphabet into a list of numeric codes. The result is padded to the specified length.
+
+#### `decode(alphabet: str, codes: list[int], length_part: int = 3) -> str`
+
+Decodes a list of numeric codes back into the original text using a specified alphabet.
 
 ## Example
 
 ```python
-from encoding_module import *
-
-# Define the alphabet
 alphabet = "0123456789ABBCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,!? "
+text_to_encode = "Hello, World!"
+encoded_codes = encode(alphabet, text_to_encode)
+decoded_text = decode(alphabet, encoded_codes)
 
-# Example text
-input_text = "Hello, World!"
-
-# Encode the text
-encoded_text = encode(alphabet, input_text)
-
-# Decode the codes
-decoded_text = decode(alphabet, encoded_text)
-
-print(f"Original Text: {input_text}")
-print(f"Encoded Codes: {encoded_text}")
+print(f"Original Text: {text_to_encode}")
+print(f"Encoded Codes: {encoded_codes}")
 print(f"Decoded Text: {decoded_text}")
 ```
-
-Feel free to customize the alphabet, text, and parameters according to your needs.
-
-## Functions Overview
-
-- **`encode`**
-    - Converts a text into a list of codes using the specified alphabet.
-- **`decode`**
-    - Converts a list of codes back into the original text using the specified alphabet.
-- **`fromListToStr`**
-    - Converts a list of words into a single string.
-- **`splitText`**
-    - Splits a text into parts of a specified length.
-- **`roundSymbols`**
-    - Adds padding to a text to make its length a multiple of a specified value.
-
-## Notes
-
-- Make sure to keep the `alphabet` consistent when encoding and decoding texts.
-- Adjust the optional parameters (`padding` and `length_part`) based on your specific use case.
-
-Feel free to explore and integrate this module into your projects!
